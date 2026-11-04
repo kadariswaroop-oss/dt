@@ -1,0 +1,94 @@
+:host {
+  display: block;
+}
+
+.page-header {
+  margin-bottom: 1rem;
+}
+
+.page-header h2 {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+}
+
+.eyebrow {
+  margin: 0 0 0.35rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  box-shadow: var(--shadow-soft);
+}
+
+.empty-state {
+  min-height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(160px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.metric-card {
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: rgba(248, 250, 252, 0.8);
+}
+
+.metric-card span {
+  display: block;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.7rem;
+  margin-bottom: 0.5rem;
+}
+
+.metric-card strong {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.chart-grid {
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.chart-panel {
+  padding: 1.2rem;
+}
+
+.chart-panel h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.wide-chart {
+  grid-column: 1 / -1;
+}
+
+canvas {
+  width: 100% !important;
+  height: 260px !important;
+}
+
+@media (max-width: 900px) {
+  .metric-grid,
+  .chart-grid {
+    grid-template-columns: 1fr;
+  }
+}

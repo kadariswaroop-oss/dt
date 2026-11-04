@@ -1,0 +1,61 @@
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Breed catalog</p>
+    <h2>Breed Information</h2>
+  </div>
+</section>
+
+<section class="card filters-panel">
+  <div class="filter-row">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      (input)="applyFilters()"
+      placeholder="Search breed"
+      aria-label="Search breeds"
+    />
+
+    <select [(ngModel)]="categoryFilter" (change)="applyFilters()" aria-label="Filter by category">
+      <option value="All">All</option>
+      <option value="Cattle">Cattle</option>
+      <option value="Buffalo">Buffalo</option>
+    </select>
+  </div>
+</section>
+
+<div class="catalog-grid">
+  <section class="card breed-list-panel">
+    <div *ngIf="!filteredBreeds.length" class="empty-state">No breeds found matching the current filters.</div>
+
+    <div *ngIf="filteredBreeds.length" class="breed-list">
+      <article *ngFor="let breed of filteredBreeds" class="breed-item" (click)="selectedBreed = breed" [class.selected]="selectedBreed?.name === breed.name">
+        <div class="breed-swatch"></div>
+        <div class="breed-copy">
+          <h4>{{ breed.display_name }}</h4>
+          <span>{{ breed.category }}</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="card detail-panel" *ngIf="selectedBreed">
+    <span class="detail-tag">{{ selectedBreed.category }}</span>
+    <h3>{{ selectedBreed.display_name }}</h3>
+    <p>{{ selectedBreed.description }}</p>
+
+    <dl>
+      <div>
+        <dt>Breed</dt>
+        <dd>{{ selectedBreed.display_name }}</dd>
+      </div>
+      <div>
+        <dt>Category</dt>
+        <dd>{{ selectedBreed.category }}</dd>
+      </div>
+      <div>
+        <dt>Origin</dt>
+        <dd>{{ selectedBreed.origin }}</dd>
+      </div>
+    </dl>
+  </section>
+</div>

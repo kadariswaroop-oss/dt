@@ -1,0 +1,132 @@
+<section class="hero card">
+  <div class="hero-copy">
+    <span class="badge">AI-powered animal recognition</span>
+    <h2>AI Cattle &amp; Buffalo Breed Recognition</h2>
+    <p>AI-powered image-based breed identification and categorization system.</p>
+    <div class="hero-actions">
+      <a routerLink="/recognition" class="primary-btn">Identify Breed</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="mini-stat">
+      <span class="mini-label">System status</span>
+      <strong>Ready</strong>
+    </div>
+    <div class="hero-badge-wrap">
+      <span class="hero-badge">Cattle</span>
+      <span class="hero-badge secondary">Buffalo</span>
+    </div>
+  </div>
+</section>
+
+<section class="section-grid stats-grid">
+  <article *ngFor="let item of stats" class="stat-card card {{ item.tone }}">
+    <div class="stat-topline">
+      <span class="stat-label">{{ item.label }}</span>
+      <span class="stat-icon">↗</span>
+    </div>
+    <div class="stat-value">{{ item.value }}</div>
+    <div class="stat-meta">{{ item.meta }}</div>
+  </article>
+</section>
+
+<section class="card overview-panel">
+  <div class="section-head">
+    <h3>Recent Predictions</h3>
+    <a routerLink="/history" class="text-link">View all</a>
+  </div>
+
+  <div *ngIf="isLoading" class="loading-state">Loading recent activity...</div>
+
+  <div *ngIf="!isLoading" class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Breed</th>
+          <th>Category</th>
+          <th>Confidence</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prediction of recentPredictions">
+          <td>
+            <img [src]="prediction.image" [alt]="prediction.breed" class="preview-thumb" />
+          </td>
+          <td>{{ prediction.breed }}</td>
+          <td>
+            <span class="pill" [class.buffalo]="prediction.category === 'Buffalo'">
+              {{ prediction.category }}
+            </span>
+          </td>
+          <td>{{ prediction.confidence.toFixed(1) }}%</td>
+          <td>{{ prediction.created_at | date: 'mediumDate' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="card process-panel">
+  <div class="section-head">
+    <h3>How It Works</h3>
+  </div>
+
+  <div class="steps-grid">
+    <article class="step-item">
+      <span class="step-no">1</span>
+      <h4>Upload Image</h4>
+      <p>Select a clear photo of a cattle or buffalo.</p>
+    </article>
+    <article class="step-item">
+      <span class="step-no">2</span>
+      <h4>AI Processing</h4>
+      <p>Preprocessing and feature extraction prepare the image.</p>
+    </article>
+    <article class="step-item">
+      <span class="step-no">3</span>
+      <h4>Breed Detection</h4>
+      <p>Transfer learning model predicts the breed confidently.</p>
+    </article>
+    <article class="step-item">
+      <span class="step-no">4</span>
+      <h4>View Results</h4>
+      <p>Review the category, breed information, and history.</p>
+    </article>
+  </div>
+</section>
+
+<section class="card breed-panel">
+  <div class="section-head">
+    <h3>Supported Breeds</h3>
+  </div>
+
+  <div class="breed-grid">
+    <article class="breed-card">
+      <span class="breed-tag cattle">Cattle</span>
+      <h4>Gir</h4>
+    </article>
+    <article class="breed-card">
+      <span class="breed-tag cattle">Cattle</span>
+      <h4>Holstein Friesian</h4>
+    </article>
+    <article class="breed-card">
+      <span class="breed-tag cattle">Cattle</span>
+      <h4>Jersey</h4>
+    </article>
+    <article class="breed-card">
+      <span class="breed-tag cattle">Cattle</span>
+      <h4>Sahiwal</h4>
+    </article>
+    <article class="breed-card">
+      <span class="breed-tag buffalo">Buffalo</span>
+      <h4>Jaffrabadi</h4>
+    </article>
+    <article class="breed-card">
+      <span class="breed-tag buffalo">Buffalo</span>
+      <h4>Murrah</h4>
+    </article>
+  </div>
+</section>

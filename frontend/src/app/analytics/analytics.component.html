@@ -1,0 +1,64 @@
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Performance</p>
+    <h2>Analytics</h2>
+  </div>
+</section>
+
+<div *ngIf="!analytics" class="empty-state card">No data exists yet. Upload an image to generate analytics.</div>
+
+<div *ngIf="analytics" class="analytics-layout">
+  <section class="card metric-grid">
+    <article class="metric-card">
+      <span>Total Predictions</span>
+      <strong>{{ analytics.total_predictions }}</strong>
+    </article>
+    <article class="metric-card">
+      <span>Cattle Predictions</span>
+      <strong>{{ analytics.cattle_predictions }}</strong>
+    </article>
+    <article class="metric-card">
+      <span>Buffalo Predictions</span>
+      <strong>{{ analytics.buffalo_predictions }}</strong>
+    </article>
+    <article class="metric-card">
+      <span>Average Confidence</span>
+      <strong>{{ analytics.average_confidence.toFixed(1) }}%</strong>
+    </article>
+  </section>
+
+  <section class="chart-grid">
+    <article class="card chart-panel">
+      <h3>Cattle vs Buffalo distribution</h3>
+      <canvas
+        baseChart
+        [type]="doughnutChartType"
+        [data]="doughnutChartData"
+        [options]="doughnutChartOptions"
+      >
+      </canvas>
+    </article>
+
+    <article class="card chart-panel">
+      <h3>Breed prediction distribution</h3>
+      <canvas
+        baseChart
+        [type]="barChartType"
+        [data]="barChartData"
+        [options]="barChartOptions"
+      >
+      </canvas>
+    </article>
+
+    <article class="card chart-panel wide-chart">
+      <h3>Predictions over time</h3>
+      <canvas
+        baseChart
+        [type]="lineChartType"
+        [data]="lineChartData"
+        [options]="lineChartOptions"
+      >
+      </canvas>
+    </article>
+  </section>
+</div>

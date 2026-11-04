@@ -1,0 +1,86 @@
+<section class="page-header">
+  <div>
+    <p class="eyebrow">AI prediction</p>
+    <h2>Identify Cattle or Buffalo Breed</h2>
+  </div>
+</section>
+
+<div class="content-grid">
+  <section class="card upload-panel">
+    <h3>Upload Animal Image</h3>
+    <p>Upload a clear image of the animal and our AI model will identify its breed.</p>
+
+    <div
+      class="upload-dropzone"
+      [class.has-file]="selectedFile"
+      (dragover)="$event.preventDefault()"
+      (drop)="onDrop($event)"
+    >
+      <input type="file" id="imageUpload" accept=".jpg,.jpeg,.png,image/jpeg,image/png" hidden (change)="onFileSelected($event)" />
+      <label for="imageUpload" class="drag-label">
+        <span class="upload-icon">⬆</span>
+        <strong>Upload Animal Image</strong>
+        <small>Click to browse or drag &amp; drop an image</small>
+      </label>
+    </div>
+
+    <div *ngIf="previewUrl" class="preview-block">
+      <img [src]="previewUrl" alt="Selected animal preview" />
+      <div class="preview-actions">
+        <button type="button" class="ghost-btn" (click)="removeImage()">Remove image</button>
+        <label for="imageUpload" class="inline-label">Replace image</label>
+      </div>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-box">
+      {{ errorMessage }}
+    </div>
+
+    <div class="action-row">
+      <button type="button" class="primary-btn" [disabled]="isLoading || !selectedFile" (click)="analyze()">
+        {{ isLoading ? 'Analyzing image...' : 'Analyze Image' }}
+      </button>
+    </div>
+  </section>
+
+  <section *ngIf="prediction" class="card result-panel">
+    <div class="result-header">
+      <h3>Prediction Result</h3>
+      <span class="confidence-badge">{{ prediction.confidence.toFixed(1) }}%</span>
+    </div>
+
+    <div class="result-grid">
+      <div>
+        <span class="field-label">Animal Category</span>
+        <strong>{{ prediction.category }}</strong>
+      </div>
+      <div>
+        <span class="field-label">Predicted Breed</span>
+        <strong>{{ prediction.display_name || prediction.breed }}</strong>
+      </div>
+      <div>
+        <span class="field-label">Confidence</span>
+        <strong>{{ prediction.confidence.toFixed(2) }}%</strong>
+      </div>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-bar" [style.width.%]="prediction.confidence"></div>
+    </div>
+
+    <div class="breed-info-card">
+      <h4>Breed Information</h4>
+      <ul>
+        <li><span>Breed:</span> {{ prediction.display_name || prediction.breed }}</li>
+        <li><span>Category:</span> {{ prediction.category }}</li>
+        <li><span>Origin:</span> {{ prediction.origin || 'Unknown' }}</li>
+        <li><span>Characteristics:</span> {{ prediction.description || 'No description available.' }}</li>
+      </ul>
+    </div>
+
+    <div class="secondary-actions">
+      <button type="button" class="ghost-btn" (click)="removeImage()">Analyze Another Image</button>
+      <button type="button" class="secondary-btn" (click)="navigateToHistory()">View History</button>
+    </div>
+  </section>
+</div>

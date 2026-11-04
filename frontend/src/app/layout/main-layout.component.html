@@ -1,0 +1,51 @@
+<div class="app-shell">
+  <aside class="sidebar" [class.collapsed]="!isSidebarOpen">
+    <div class="brand-wrap">
+      <div class="brand-mark">AI</div>
+      <div class="brand-copy">
+        <span class="brand-name">AI BreedVision</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav" aria-label="Main navigation">
+      <a
+        *ngFor="let item of navItems"
+        [routerLink]="item.path"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="nav-item"
+      >
+        <span class="nav-icon">{{ item.icon }}</span>
+        <span class="nav-label">{{ item.label }}</span>
+      </a>
+    </nav>
+  </aside>
+
+  <div class="content-panel">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="icon-button" type="button" (click)="toggleSidebar()" aria-label="Toggle sidebar">
+          ☰
+        </button>
+        <div>
+          <span class="eyebrow">Overview</span>
+          <h1>{{ currentTitle }}</h1>
+        </div>
+      </div>
+
+      <div class="topbar-actions">
+        <div class="search-box">
+          <span>⌕</span>
+          <input type="text" placeholder="Search" />
+        </div>
+        <button class="avatar-button" type="button" aria-label="Profile">
+          <span>AS</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="page-content">
+      <router-outlet />
+    </main>
+  </div>
+</div>

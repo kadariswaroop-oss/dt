@@ -1,0 +1,76 @@
+:host {
+  display: block;
+}
+
+.page-header {
+  margin-bottom: 1rem;
+}
+
+.page-header h2 {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+}
+
+.eyebrow {
+  margin: 0 0 0.35rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+}
+
+.project-layout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  box-shadow: var(--shadow-soft);
+  padding: 1.3rem;
+}
+
+.panel h3 {
+  margin-top: 0;
+}
+
+.panel p,
+.panel li,
+.panel ol {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.flow-step {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0.8rem;
+  border-radius: 10px;
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--primary-dark);
+  margin: 0.3rem 0.5rem 0.3rem 0;
+  font-weight: 700;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.tags span {
+  display: inline-flex;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.04);
+  padding: 0.45rem 0.7rem;
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .project-layout {
+    grid-template-columns: 1fr;
+  }
+}

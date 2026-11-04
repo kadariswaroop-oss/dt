@@ -1,0 +1,11 @@
+venv/
+**pycache__/
+*.pyc
+.env
+backend/uploads/
+predictions.db
+backend/models/
+.DS_Store
+node_modules/
+frontend/dist/
+frontend/.angular/

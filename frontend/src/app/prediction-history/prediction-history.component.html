@@ -1,0 +1,66 @@
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Records</p>
+    <h2>Prediction History</h2>
+  </div>
+</section>
+
+<section class="card toolbar-panel">
+  <div class="toolbar-row">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      (input)="applyFilters()"
+      placeholder="Search by breed or category"
+      aria-label="Search predictions"
+    />
+
+    <select [(ngModel)]="categoryFilter" (change)="applyFilters()" aria-label="Filter by category">
+      <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+    </select>
+
+    <select [(ngModel)]="breedFilter" (change)="applyFilters()" aria-label="Filter by breed">
+      <option *ngFor="let breed of breeds" [value]="breed">{{ breed }}</option>
+    </select>
+
+    <button type="button" class="secondary-btn" (click)="sortDirection = sortDirection === 'asc' ? 'desc' : 'asc'; applyFilters()">
+      Sort by date: {{ sortDirection === 'asc' ? 'Oldest' : 'Newest' }}
+    </button>
+  </div>
+</section>
+
+<section class="card table-panel">
+  <div *ngIf="!filteredPredictions.length" class="empty-state">No predictions yet</div>
+
+  <div *ngIf="filteredPredictions.length" class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Breed</th>
+          <th>Category</th>
+          <th>Confidence</th>
+          <th>Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prediction of filteredPredictions">
+          <td>
+            <img [src]="prediction.image_path || 'https://images.unsplash.com/photo-1559697249-94a95a2fd6e6?auto=format&fit=crop&w=600&q=80'" alt="Prediction" class="thumb" />
+          </td>
+          <td>{{ prediction.breed }}</td>
+          <td>
+            <span class="pill" [class.buffalo]="prediction.category === 'Buffalo'">{{ prediction.category }}</span>
+          </td>
+          <td>{{ prediction.confidence.toFixed(1) }}%</td>
+          <td>{{ prediction.created_at | date: 'mediumDate' }}</td>
+          <td class="action-cell">
+            <button type="button" class="ghost-btn">View</button>
+            <button type="button" class="danger-btn" (click)="deletePrediction(prediction.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
